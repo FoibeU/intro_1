@@ -1,0 +1,7 @@
+number="file.txt"
+while read -r line; do
+        echo "$line"
+done <$number
+current= $"(date +'%d/%m/%Y')"
+printf"Current date in dd/mm/yyyy format%s\n""$current"
+
