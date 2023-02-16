@@ -1,6 +1,6 @@
-now="$(date +'%d/%m/%Y')"
-echo "Today's date" $now
+current="$(date +'%d-%m-%Y'-file.txt)"
+echo "Today's date "$current
 number="file.txt"
 while read -r line; do
-        echo "$line"
+	echo "$line"
 done <$number
