@@ -1,0 +1,25 @@
+cle# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.env
+.venv
+venv/
+env/
+env.bak/
+.DS_Store
+*.egg-info/
+
+# Django
+*.log
+db.sqlite3
+media/
+staticfiles/
+*.pot
+*.pyc
+
+# IDEs
+.idea/
+.vscode/
+.pytest_cache/

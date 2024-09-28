@@ -1,0 +1,175 @@
+openapi: 3.0.0
+info:
+  title: UniNest API
+  version: v1
+  description: API for managing university residences.
+  contact:
+    name: UniNest Support
+    email: support@uninest.local
+
+paths:
+  /api/buildings/:
+    get:
+      summary: List all buildings
+      description: Retrieve a list of all buildings in the system.
+      responses:
+        '200':
+          description: A list of buildings.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Building'
+    post:
+      summary: Create a new building
+      description: Add a new building to the system.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Building'
+      responses:
+        '201':
+          description: Building created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Building'
+
+  /api/buildings/{id}/:
+    get:
+      summary: Retrieve a building
+      description: Get details of a specific building by its ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the building
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Details of the building.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Building'
+        '404':
+          description: Building not found.
+
+    put:
+      summary: Update a building
+      description: Modify an existing building by its ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the building
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Building'
+      responses:
+        '200':
+          description: Building updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Building'
+        '404':
+          description: Building not found.
+
+    delete:
+      summary: Delete a building
+      description: Remove a building from the system.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the building
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Building deleted successfully.
+        '404':
+          description: Building not found.
+
+  # Room and Resident endpoints can be documented similarly
+  /api/rooms/:
+    # Document get and post methods for rooms
+    # ...
+
+  /api/rooms/{id}/:
+    # Document get, put, and delete methods for specific room
+    # ...
+
+  /api/residents/:
+    # Document get and post methods for residents
+    # ...
+
+  /api/residents/{id}/:
+    # Document get, put, and delete methods for specific resident
+    # ...
+
+components:
+  schemas:
+    Building:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+          example: "Main Library"
+        address:
+          type: string
+          example: "123 University Ave"
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    Room:
+      type: object
+      properties:
+        id:
+          type: integer
+        building:
+          type: integer
+          description: "ID of the associated building"
+        room_number:
+          type: string
+          example: "101"
+        floor:
+          type: integer
+          example: 1
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    Resident:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+          example: "John Doe"
+        room:
+          type: integer
+          description: "ID of the associated room"
+        move_in_date:
+          type: string
+          format: date
